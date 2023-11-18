@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
-import Client from '../models/Clients'
+import Client from './../models/Client'
 
 const createClient = async (
   req: Request,

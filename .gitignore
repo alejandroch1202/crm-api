@@ -219,3 +219,6 @@ $RECYCLE.BIN/
 
 # MongoDB data
 db
+
+# uploads 
+uploads
