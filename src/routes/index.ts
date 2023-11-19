@@ -2,6 +2,7 @@ import { Router } from 'express'
 import type { Express } from 'express'
 import clients from './clients'
 import products from './products'
+import orders from './orders'
 
 const router = (app: Express): void => {
   const router = Router()
@@ -11,6 +12,8 @@ const router = (app: Express): void => {
   router.use('/clients', clients)
 
   router.use('/products', products)
+
+  router.use('/orders', orders)
 }
 
 export default router
