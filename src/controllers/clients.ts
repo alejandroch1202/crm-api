@@ -11,7 +11,11 @@ const createClient = async (
     await client.save()
     res.status(201).json({ ok: true, message: 'Client created' })
   } catch (error) {
-    console.log(error)
+    if ((error as any).code === 11000) {
+      return res
+        .status(400)
+        .json({ ok: false, message: 'Client already exists' })
+    }
     res.status(500).json({ ok: false, message: 'Server error' })
     next()
   }
@@ -20,7 +24,7 @@ const createClient = async (
 const listClients = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const clients = await Client.find()
-    res.status(201).json({ ok: true, clients })
+    res.status(200).json({ ok: true, clients })
   } catch (error) {
     console.log(error)
     res.status(500).json({ ok: false, message: 'Server error' })

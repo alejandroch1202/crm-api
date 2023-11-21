@@ -18,7 +18,7 @@ const listOrders = async (req: Request, res: Response, next: NextFunction) => {
     const orders = await Order.find()
       .populate('client')
       .populate({ path: 'products.product', model: 'Products' })
-    res.status(201).json({ ok: true, orders })
+    res.status(200).json({ ok: true, orders })
   } catch (error) {
     console.log(error)
     res.status(500).json({ ok: false, message: 'Server error' })
