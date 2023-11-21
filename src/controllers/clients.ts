@@ -12,11 +12,11 @@ const createClient = async (
     res.status(201).json({ ok: true, message: 'Client created' })
   } catch (error) {
     if ((error as any).code === 11000) {
-      return res
-        .status(400)
-        .json({ ok: false, message: 'Client already exists' })
+      return res.status(400).json({ ok: false, message: 'Email already used' })
+    } else {
+      console.log(error)
+      res.status(500).json({ ok: false, message: 'Server error' })
     }
-    res.status(500).json({ ok: false, message: 'Server error' })
     next()
   }
 }
@@ -58,8 +58,12 @@ const updateClient = async (
     }
     res.status(200).json({ ok: true, message: 'Client updated' })
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ ok: false, message: 'Server error' })
+    if ((error as any).code === 11000) {
+      return res.status(400).json({ ok: false, message: 'Email already used' })
+    } else {
+      console.log(error)
+      res.status(500).json({ ok: false, message: 'Server error' })
+    }
     next()
   }
 }
