@@ -12,6 +12,8 @@ app.use(express.json())
 app.use(cors())
 router(app)
 
+app.use(express.static('uploads'))
+
 app.listen(PORT, () => {
   console.log(`[server] Running on http://localhost:${PORT}`)
 })

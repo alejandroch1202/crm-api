@@ -24,7 +24,7 @@ const createProduct = async (
 
 const uploadImage = async (req: Request, res: Response, next: NextFunction) => {
   upload(req, res, (error) => {
-    if (error !== undefined) {
+    if (error !== undefined && error !== null) {
       res.json({ message: error })
     }
     next()
@@ -104,8 +104,8 @@ const removeProduct = async (
       return res.status(404).json({ ok: false, message: 'Product not found' })
     }
     unlink(`uploads/${product.image}`, (error) => {
-      if (error !== undefined) {
-        console.log(error)
+      if (error !== undefined && error !== null) {
+        console.log('HERE', error)
       }
     })
     await Product.findByIdAndDelete(req.params.id)
