@@ -37,7 +37,14 @@ const listProducts = async (
   next: NextFunction
 ) => {
   try {
-    const products = await Product.find()
+    let products
+    if (req.query.search !== undefined) {
+      products = await Product.find({
+        name: new RegExp(req.query.search as string, 'i')
+      })
+    } else {
+      products = await Product.find()
+    }
     res.status(200).json({ ok: true, products })
   } catch (error) {
     console.log(error)
