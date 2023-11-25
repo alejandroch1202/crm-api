@@ -1,22 +1,16 @@
 import { Router } from 'express'
-import {
-  createClient,
-  listClients,
-  findClient,
-  updateClient,
-  removeClient
-} from './../controllers/clients'
+import { create, list, find, update, remove } from './../controllers/clients'
 
 const router = Router()
 
-router.post('/', createClient)
+router.post('/', create)
 
-router.get('/', listClients)
+router.get('/', list)
 
-router.get('/:id', findClient)
+router.get('/:id', find)
 
-router.put('/:id', updateClient)
+router.put('/:id', update)
 
-router.delete('/:id', removeClient)
+router.delete('/:id', remove)
 
 export default router

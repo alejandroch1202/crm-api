@@ -1,22 +1,16 @@
 import { Router } from 'express'
-import {
-  createOrder,
-  listOrders,
-  findOrder,
-  updateOrder,
-  removeOrder
-} from './../controllers/orders'
+import { create, list, find, update, remove } from './../controllers/orders'
 
 const router = Router()
 
-router.post('/', createOrder)
+router.post('/', create)
 
-router.get('/', listOrders)
+router.get('/', list)
 
-router.get('/:id', findOrder)
+router.get('/:id', find)
 
-router.put('/:id', updateOrder)
+router.put('/:id', update)
 
-router.delete('/:id', removeOrder)
+router.delete('/:id', remove)
 
 export default router

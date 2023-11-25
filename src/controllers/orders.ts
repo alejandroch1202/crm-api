@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import Order from './../models/Order'
 
-const createOrder = async (req: Request, res: Response, next: NextFunction) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const order = new Order(req.body)
     await order.save()
@@ -13,7 +13,7 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const listOrders = async (req: Request, res: Response, next: NextFunction) => {
+const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const orders = await Order.find()
       .populate('client')
@@ -26,7 +26,7 @@ const listOrders = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const findOrder = async (req: Request, res: Response, next: NextFunction) => {
+const find = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const order = await Order.findById(req.params.id)
       .populate('client')
@@ -42,7 +42,7 @@ const findOrder = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const updateOrder = async (req: Request, res: Response, next: NextFunction) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const order = await Order.findByIdAndUpdate(req.params.id, req.body)
     if (order === null) {
@@ -56,7 +56,7 @@ const updateOrder = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const removeOrder = async (req: Request, res: Response, next: NextFunction) => {
+const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const order = await Order.findByIdAndDelete(req.params.id)
     if (order === null) {
@@ -70,4 +70,4 @@ const removeOrder = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export { createOrder, listOrders, findOrder, updateOrder, removeOrder }
+export { create, list, find, update, remove }

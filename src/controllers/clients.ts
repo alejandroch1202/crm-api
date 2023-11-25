@@ -1,11 +1,7 @@
 import type { Request, Response, NextFunction } from 'express'
 import Client from './../models/Client'
 
-const createClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const client = new Client(req.body)
     await client.save()
@@ -21,7 +17,7 @@ const createClient = async (
   }
 }
 
-const listClients = async (req: Request, res: Response, next: NextFunction) => {
+const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const clients = await Client.find()
     res.status(200).json({ ok: true, clients })
@@ -32,7 +28,7 @@ const listClients = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const findClient = async (req: Request, res: Response, next: NextFunction) => {
+const find = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const client = await Client.findById(req.params.id)
     if (client === null) {
@@ -46,11 +42,7 @@ const findClient = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const updateClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const client = await Client.findByIdAndUpdate(req.params.id, req.body)
     if (client === null) {
@@ -68,11 +60,7 @@ const updateClient = async (
   }
 }
 
-const removeClient = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const client = await Client.findByIdAndDelete(req.params.id)
     if (client === null) {
@@ -86,4 +74,4 @@ const removeClient = async (
   }
 }
 
-export { createClient, listClients, findClient, updateClient, removeClient }
+export { create, list, find, update, remove }

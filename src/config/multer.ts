@@ -1,6 +1,6 @@
 import type { Request } from 'express'
 import multer, { type FileFilterCallback } from 'multer'
-import { generateId } from '../utils/generateId'
+import { generateId } from '../utils/token'
 
 type DestinationCallback = (error: Error | null, destination: string) => void
 type FileNameCallback = (error: Error | null, filename: string) => void

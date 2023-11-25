@@ -3,11 +3,7 @@ import { unlink } from 'fs'
 import { upload } from '../config/multer'
 import Product from './../models/Product'
 
-const createProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const product = new Product(req.body)
     if (req.file?.filename !== undefined) {
@@ -31,11 +27,7 @@ const uploadImage = async (req: Request, res: Response, next: NextFunction) => {
   })
 }
 
-const listProducts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const list = async (req: Request, res: Response, next: NextFunction) => {
   try {
     let products
     if (req.query.search !== undefined) {
@@ -53,7 +45,7 @@ const listProducts = async (
   }
 }
 
-const findProduct = async (req: Request, res: Response, next: NextFunction) => {
+const find = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const product = await Product.findById(req.params.id)
     if (product === null) {
@@ -67,11 +59,7 @@ const findProduct = async (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-const updateProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const changes = req.body
     // If user didn't upload an image, keep the previous one
@@ -100,11 +88,7 @@ const updateProduct = async (
   }
 }
 
-const removeProduct = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const product = await Product.findById(req.params.id)
     if (product === null) {
@@ -124,11 +108,4 @@ const removeProduct = async (
   }
 }
 
-export {
-  createProduct,
-  uploadImage,
-  listProducts,
-  findProduct,
-  updateProduct,
-  removeProduct
-}
+export { create, uploadImage, list, find, update, remove }
