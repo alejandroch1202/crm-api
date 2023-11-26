@@ -23,6 +23,11 @@ const generateJwt = ({ id, name, email }: User) => {
   )
 }
 
+const verifyJwt = (token: string) => {
+  const secret = process.env.JWT_SECRET as string
+  return jwt.verify(token, secret)
+}
+
 const generateId = () => {
   return Math.random().toString(32).substring(2) + Date.now().toString(32)
 }
@@ -39,4 +44,10 @@ const comparePassword = (password: string, hash: string): boolean => {
   return bcrypt.compareSync(password, hash)
 }
 
-export { generateJwt, generateId, extractCredentials, comparePassword }
+export {
+  generateJwt,
+  verifyJwt,
+  generateId,
+  extractCredentials,
+  comparePassword
+}
