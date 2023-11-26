@@ -20,7 +20,7 @@ app.use(
       if (allowed) {
         callback(null, true)
       } else {
-        callback(new Error('Blocked by CORS'), false)
+        callback(new Error(`Origin "${origin}" Blocked by CORS`), false)
       }
     }
   })
